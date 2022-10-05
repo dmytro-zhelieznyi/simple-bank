@@ -27,12 +27,11 @@ public class TransactionService {
         return List.of(from, to);
     }
 
-    private boolean validateTransfer(Card from, Card to, BigDecimal amount) {
+    private void validateTransfer(Card from, Card to, BigDecimal amount) {
         BigDecimal subtract = from.getAmount().subtract(amount);
         int compareTo = subtract.compareTo(new BigDecimal(0));
-        if (compareTo < 0) throw new RuntimeException("Insufficient funds on the account. Card amount [" 
+        if (compareTo < 0) throw new RuntimeException("Insufficient funds on the account. Card amount ["
                 + from.getAmount() + "], amount [" + amount + "]");
-        return true;
     }
 
 }
