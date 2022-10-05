@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/simple_bank}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
