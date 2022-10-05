@@ -6,11 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @Service
@@ -58,8 +56,15 @@ public class CardService {
             number.append(random.nextInt(9) + 1);
         }
 
-        // TODO create validator to check if number is unique
-        return number.toString();
+        if (isCardNumberUnique(number.toString())) {
+            return number.toString();
+        }
+
+        return generateUniqueCardNumber();
+    }
+
+    private boolean isCardNumberUnique(String number) {
+        return cardRepository.findByNumber(number).isEmpty();
     }
 
 }
