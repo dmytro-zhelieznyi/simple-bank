@@ -1,13 +1,18 @@
 package com.example.simplebank.data.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class Card {
 
     @Id
@@ -18,6 +23,6 @@ public class Card {
     String number;
 
     @Column(name = "amount")
-    Long amount;
+    BigDecimal amount;
 
 }
