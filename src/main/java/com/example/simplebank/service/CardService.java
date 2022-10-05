@@ -23,13 +23,18 @@ public class CardService {
     public void postConstructor() {
         // TODO change with liquibase change sets
         List<Card> cards = Stream.generate(this::createCard)
-                .limit(10)
+                .limit(2)
                 .toList();
 
         cards.forEach(card -> {
             card.setAmount(new BigDecimal(10_000));
             updateCard(card);
         });
+    }
+
+    public Card find(Long id) {
+        return cardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Card with id [" + id + "] doesn't exist"));
     }
 
     public Card createCard() {
