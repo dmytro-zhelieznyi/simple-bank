@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "card")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

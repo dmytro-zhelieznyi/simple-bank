@@ -28,6 +28,7 @@ public class TransactionService {
     }
 
     private void validateTransfer(Card from, Card to, BigDecimal amount) {
+        //TODO check if BigDecimal .setScale(2, RoundingMode.CEILING)
         BigDecimal subtract = from.getAmount().subtract(amount);
         int compareTo = subtract.compareTo(new BigDecimal(0));
         if (compareTo < 0) throw new RuntimeException("Insufficient funds on the account. Card amount ["
