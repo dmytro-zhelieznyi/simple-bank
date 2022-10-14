@@ -1,7 +1,10 @@
 package com.example.simplebank.service;
 
+import com.example.simplebank.data.dto.TransferResponse;
 import com.example.simplebank.data.entity.Card;
+import com.example.simplebank.data.entity.Transaction;
 import com.example.simplebank.repository.CardRepository;
+import com.example.simplebank.repository.TransactionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +27,20 @@ public class TransactionServiceTest {
     @Autowired
     private CardRepository cardRepository;
 
+    @Autowired
+    private TransactionRepository transactionRepository;
+
     @Test
     public void transferSuccessWhenCardFromAmountHigherThanAmount() {
-        transactionService.transfer(1L, 2L,
+        TransferResponse transfer = transactionService.transfer(1L, 2L,
                 new BigDecimal(5_000).setScale(2, RoundingMode.CEILING));
         Card from = cardRepository.findById(1L).get();
         Card to = cardRepository.findById(2L).get();
+        Transaction transaction = transactionRepository.findById(transfer.getTransaction().getId()).get();
+
         assertEquals(new BigDecimal(5_000).setScale(2, RoundingMode.CEILING), from.getAmount());
         assertEquals(new BigDecimal(15_000).setScale(2, RoundingMode.CEILING), to.getAmount());
+        assertEquals(transfer.getTransaction(), transaction);
     }
 
     @Test

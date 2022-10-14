@@ -6,23 +6,29 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "card")
+@Table(name = "transaction")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 @EqualsAndHashCode
-public class Card {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", unique = true, nullable = false, updatable = false)
-    private String number;
+    @Column(name = "card_number_from")
+    private String cardNumberFrom;
+
+    @Column(name = "card_number_to")
+    private String cardNumberTo;
 
     @Column(name = "amount")
     private BigDecimal amount;
+
+    @Column(name = "is_success")
+    private Boolean isSuccess;
 
 }
