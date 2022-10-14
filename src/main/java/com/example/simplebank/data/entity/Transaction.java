@@ -32,7 +32,7 @@ public class Transaction {
     @Column(name = "is_success")
     private Boolean isSuccess;
 
-    @Column
+    @Column(name = "date")
     private String date;
 
 }
