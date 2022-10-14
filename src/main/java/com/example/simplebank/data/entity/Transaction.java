@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transaction")
@@ -30,5 +31,8 @@ public class Transaction {
 
     @Column(name = "is_success")
     private Boolean isSuccess;
+
+    @Column
+    private String date;
 
 }
