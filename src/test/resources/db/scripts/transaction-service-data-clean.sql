@@ -1,1 +1,1 @@
-delete from Card;
+delete from card;
