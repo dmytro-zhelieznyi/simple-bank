@@ -32,7 +32,7 @@ public class Transaction {
     @Column(name = "is_success")
     private Boolean isSuccess;
 
-    //TODO check why postgres Timestamp is shorter than java LocalDateTime
+    // TODO check why postgres Timestamp is shorter than java LocalDateTime
     @EqualsAndHashCode.Exclude
     @Column(name = "date")
     private LocalDateTime date;
