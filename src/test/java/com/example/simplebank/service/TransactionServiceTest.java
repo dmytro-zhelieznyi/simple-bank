@@ -41,6 +41,9 @@ public class TransactionServiceTest {
         Card to = cardRepository.findById(2L).get();
         Transaction transaction = transactionRepository.findById(transfer.getTransaction().getId()).get();
 
+        System.out.println(transfer.getTransaction().getDate());
+        System.out.println(transaction.getDate());
+
         assertEquals(new BigDecimal(5_000).setScale(2, RoundingMode.CEILING), from.getAmount());
         assertEquals(new BigDecimal(15_000).setScale(2, RoundingMode.CEILING), to.getAmount());
         assertEquals(transfer.getTransaction(), transaction);

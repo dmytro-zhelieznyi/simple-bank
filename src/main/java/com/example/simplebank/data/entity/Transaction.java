@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transaction")
@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode()
 public class Transaction {
 
     @Id
@@ -32,7 +32,9 @@ public class Transaction {
     @Column(name = "is_success")
     private Boolean isSuccess;
 
+    //TODO check why postgres Timestamp is shorter than java LocalDateTime
+    @EqualsAndHashCode.Exclude
     @Column(name = "date")
-    private Timestamp date;
+    private LocalDateTime date;
 
 }

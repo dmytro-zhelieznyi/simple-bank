@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service
@@ -48,7 +47,7 @@ public class TransactionService {
                 .cardNumberTo(to.getNumber())
                 .amount(amount)
                 .isSuccess(true)
-                .date(Timestamp.valueOf(LocalDateTime.now()))
+                .date(LocalDateTime.now())
                 .build();
 
         transactionRepository.save(transaction);
