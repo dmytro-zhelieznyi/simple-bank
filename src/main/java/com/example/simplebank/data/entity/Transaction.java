@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "transaction")
@@ -33,6 +33,6 @@ public class Transaction {
     private Boolean isSuccess;
 
     @Column(name = "date")
-    private LocalDateTime date;
+    private Timestamp date;
 
 }

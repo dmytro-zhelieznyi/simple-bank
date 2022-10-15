@@ -6,6 +6,7 @@ import com.example.simplebank.data.entity.Transaction;
 import com.example.simplebank.repository.CardRepository;
 import com.example.simplebank.repository.TransactionRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,9 @@ import org.springframework.test.context.jdbc.Sql;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @SpringBootTest
 @Sql(scripts = "classpath:db/scripts/transaction-service-data-init.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -30,7 +33,7 @@ public class TransactionServiceTest {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    @Test
+    @RepeatedTest(value = 10)
     public void transferSuccessWhenCardFromAmountHigherThanAmount() {
         TransferResponse transfer = transactionService.transfer(1L, 2L,
                 new BigDecimal(5_000).setScale(2, RoundingMode.CEILING));

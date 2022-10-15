@@ -5,10 +5,14 @@ import com.example.simplebank.data.entity.Card;
 import com.example.simplebank.data.entity.Transaction;
 import com.example.simplebank.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service
@@ -17,6 +21,7 @@ public class TransactionService {
 
     private final CardService cardService;
     private final TransactionRepository transactionRepository;
+    private final RestTemplate restTemplate;
 
     @Transactional
     public TransferResponse transfer(Long fromId, Long toId, BigDecimal amount) {
@@ -43,7 +48,7 @@ public class TransactionService {
                 .cardNumberTo(to.getNumber())
                 .amount(amount)
                 .isSuccess(true)
-                .date(LocalDateTime.now())
+                .date(Timestamp.valueOf(LocalDateTime.now()))
                 .build();
 
         transactionRepository.save(transaction);
@@ -54,7 +59,12 @@ public class TransactionService {
     }
 
     private void sendTransactionToTransactionHistoryService(Transaction transaction) {
-        // TODO RestTemplate
+        HttpEntity<Transaction> requestEntity = new HttpEntity<>(transaction);
+        restTemplate.exchange("http://localhost:1002/transactions/history",
+                HttpMethod.POST,
+                requestEntity,
+                String.class
+        );
     }
 
     private void validateTransfer(Card from, BigDecimal amount) {
