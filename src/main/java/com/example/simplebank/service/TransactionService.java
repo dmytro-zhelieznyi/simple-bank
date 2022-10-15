@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +43,7 @@ public class TransactionService {
                 .cardNumberTo(to.getNumber())
                 .amount(amount)
                 .isSuccess(true)
-                .date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .date(LocalDateTime.now())
                 .build();
 
         transactionRepository.save(transaction);

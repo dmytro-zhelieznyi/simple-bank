@@ -33,6 +33,6 @@ public class Transaction {
     private Boolean isSuccess;
 
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
 
 }
