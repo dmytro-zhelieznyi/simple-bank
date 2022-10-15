@@ -60,7 +60,7 @@ public class TransactionService {
 
     private void sendTransactionToTransactionHistoryService(Transaction transaction) {
         HttpEntity<Transaction> requestEntity = new HttpEntity<>(transaction);
-        restTemplate.exchange("http://localhost:1002/transactions/history",
+        restTemplate.exchange("http://localhost:1002/transactions",
                 HttpMethod.POST,
                 requestEntity,
                 String.class
